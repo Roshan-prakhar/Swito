@@ -1,6 +1,5 @@
 package in.roshan.foodiesapi.controller;
 
-import com.razorpay.RazorpayException;
 import in.roshan.foodiesapi.io.OrderRequest;
 import in.roshan.foodiesapi.io.OrderResponse;
 import in.roshan.foodiesapi.service.OrderService;
@@ -20,7 +19,7 @@ public class OrderController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderResponse createOrderWithPayment(@RequestBody OrderRequest request) throws RazorpayException {
+    public OrderResponse createOrderWithPayment(@RequestBody OrderRequest request) {
         OrderResponse response = orderService.createOrderWithPayment(request);
         return response;
     }

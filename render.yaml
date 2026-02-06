@@ -32,10 +32,6 @@ services:
         sync: false
       - key: CLOUDFLARE_BUCKET_NAME
         sync: false
-      - key: RAZORPAY_KEY
-        sync: false
-      - key: RAZORPAY_SECRET
-        sync: false
 
 databases:
   # PostgreSQL Database
