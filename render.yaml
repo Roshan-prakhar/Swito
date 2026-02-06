@@ -1,0 +1,45 @@
+services:
+  # Spring Boot API Service
+  - type: web
+    name: foodies-api
+    env: java
+    plan: free
+    buildCommand: "./mvnw clean package -DskipTests"
+    startCommand: "java -jar target/foodiesapi-0.0.1-SNAPSHOT.jar"
+    healthCheckPath: /actuator/health
+    
+    # Add health check endpoint
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: foodies-db
+          property: connectionString
+      - key: DB_USERNAME
+        fromDatabase:
+          name: foodies-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: foodies-db
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLOUDFLARE_ACCESS_KEY
+        sync: false
+      - key: CLOUDFLARE_SECRET_KEY
+        sync: false
+      - key: CLOUDFLARE_R2_ENDPOINT
+        sync: false
+      - key: CLOUDFLARE_BUCKET_NAME
+        sync: false
+      - key: RAZORPAY_KEY
+        sync: false
+      - key: RAZORPAY_SECRET
+        sync: false
+
+databases:
+  # PostgreSQL Database
+  - name: foodies-db
+    databaseName: foodies
+    plan: free
+    ipAllowList: []
