@@ -1,7 +1,6 @@
 package in.roshan.foodiesapi.controller;
 
 import in.roshan.foodiesapi.io.PaymentRequest;
-import in.roshan.foodiesapi.io.PaymentResponse;
 import in.roshan.foodiesapi.service.DummyPaymentService;
 import in.roshan.foodiesapi.service.OrderService;
 import lombok.AllArgsConstructor;

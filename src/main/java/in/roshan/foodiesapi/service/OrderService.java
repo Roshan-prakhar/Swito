@@ -1,6 +1,5 @@
 package in.roshan.foodiesapi.service;
 
-import com.razorpay.RazorpayException;
 import in.roshan.foodiesapi.io.OrderRequest;
 import in.roshan.foodiesapi.io.OrderResponse;
 
@@ -9,7 +8,7 @@ import java.util.Map;
 
 public interface OrderService {
 
-    OrderResponse createOrderWithPayment(OrderRequest request) throws RazorpayException;
+    OrderResponse createOrderWithPayment(OrderRequest request);
 
     void verifyPayment(Map<String, String> paymentData, String status);
 
