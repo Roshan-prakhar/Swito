@@ -4,6 +4,7 @@ services:
     name: foodies-api
     env: docker
     plan: free
+    dockerContext: .
     dockerfilePath: ./Dockerfile
     healthCheckPath: /actuator/health
     
