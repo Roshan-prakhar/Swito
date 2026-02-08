@@ -18,7 +18,7 @@ public class JwtUtil {
     @Value("${jwt.secret.key}")
     private String SECRET_KEY;
     
-    // Add debug logging to check if secret key is loaded
+  
     public JwtUtil() {
         // This will be called after dependency injection
     }
