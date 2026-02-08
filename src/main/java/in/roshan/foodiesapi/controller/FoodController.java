@@ -39,7 +39,10 @@ public class FoodController {
 
     @GetMapping
     public List<FoodResponse> readFoods() {
-        return foodService.readFoods();
+        System.out.println("FoodController - GET /api/foods endpoint called");
+        List<FoodResponse> foods = foodService.readFoods();
+        System.out.println("FoodController - Returning " + foods.size() + " food items to frontend");
+        return foods;
     }
 
     @GetMapping("/{id}")

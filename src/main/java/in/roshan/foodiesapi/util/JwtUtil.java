@@ -17,6 +17,18 @@ import java.util.function.Function;
 public class JwtUtil {
     @Value("${jwt.secret.key}")
     private String SECRET_KEY;
+    
+    // Add debug logging to check if secret key is loaded
+    public JwtUtil() {
+        // This will be called after dependency injection
+    }
+    
+    public void logSecretKey() {
+        System.out.println("JWT Util - Secret key loaded: " + (SECRET_KEY != null ? "YES (length: " + SECRET_KEY.length() + ")" : "NO"));
+        if (SECRET_KEY != null) {
+            System.out.println("JWT Util - Secret key first 10 chars: " + SECRET_KEY.substring(0, Math.min(10, SECRET_KEY.length())));
+        }
+    }
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claiams = new HashMap<>();
@@ -58,8 +70,23 @@ public class JwtUtil {
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        try {
+            final String username = extractUsername(token);
+            System.out.println("JWT Util - Token username: " + username);
+            System.out.println("JWT Util - User details username: " + userDetails.getUsername());
+            System.out.println("JWT Util - Username match: " + username.equals(userDetails.getUsername()));
+            
+            boolean expired = isTokenExpired(token);
+            System.out.println("JWT Util - Token expired: " + expired);
+            
+            boolean result = username.equals(userDetails.getUsername()) && !expired;
+            System.out.println("JWT Util - Final validation result: " + result);
+            
+            return result;
+        } catch (Exception e) {
+            System.out.println("JWT Util - Validation exception: " + e.getMessage());
+            return false;
+        }
     }
 
 }

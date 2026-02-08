@@ -25,9 +25,21 @@ public class AuthController {
 
     @PostMapping("/login")
     public AuthenticationResponse login(@RequestBody AuthenticationRequest request) {
+        System.out.println("AuthController - Login attempt for: " + request.getEmail());
+        
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        System.out.println("AuthController - Authentication successful");
+        
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        System.out.println("AuthController - User loaded: " + userDetails.getUsername());
+        
+        // Log JWT secret key during generation
+        jwtUtil.logSecretKey();
+        
         final String jwtToken = jwtUtil.generateToken(userDetails);
+        System.out.println("AuthController - Token generated: " + jwtToken.substring(0, 20) + "...");
+        System.out.println("AuthController - Token length: " + jwtToken.length());
+        
         return new AuthenticationResponse(request.getEmail(), jwtToken);
     }
 }

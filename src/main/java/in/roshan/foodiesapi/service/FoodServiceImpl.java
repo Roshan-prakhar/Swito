@@ -67,7 +67,18 @@ public class FoodServiceImpl implements FoodService{
 
     @Override
     public List<FoodResponse> readFoods() {
+        System.out.println("FoodService - Reading all foods from database");
         List<FoodEntity> databaseEntries = foodRepository.findAll();
+        System.out.println("FoodService - Found " + databaseEntries.size() + " food items in database");
+        
+        if (databaseEntries.isEmpty()) {
+            System.out.println("FoodService - WARNING: No food items found in database!");
+            System.out.println("FoodService - You may need to add food items first via admin panel");
+        } else {
+            System.out.println("FoodService - Food items found:");
+            databaseEntries.forEach(food -> System.out.println("  - " + food.getName() + " (ID: " + food.getId() + ")"));
+        }
+        
         return databaseEntries.stream().map(object -> convertToResponse(object)).collect(Collectors.toList());
     }
 
