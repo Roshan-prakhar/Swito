@@ -26,7 +26,7 @@ import java.util.List;
 
 // @Configuration
 // @EnableWebSecurity
-// @AllArgsConstructor
+@AllArgsConstructor
 public class SecurityConfig {
 
     private final AppUserDetailsService userDetailsService;
