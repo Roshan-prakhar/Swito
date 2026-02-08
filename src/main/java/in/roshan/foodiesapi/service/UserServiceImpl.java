@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService{
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
+                .role("USER") // Default role for all registered users
                 .build();
     }
 
