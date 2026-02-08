@@ -46,6 +46,7 @@ public class SecurityConfig {
                     "/api/register", "/register",
                     "/api/login", "/login",
                     "/api/foods/**", "/foods/**",
+                    "/api/cart/**", "/cart/**",
                     "/api/orders/all",
                     "/api/orders/status/**",
                     "/api/payments/**"
